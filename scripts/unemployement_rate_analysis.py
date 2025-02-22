@@ -1,12 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# # Unemployment Rate Analyzed by Joti Sukheja
-
 # ## Loading Data and Importing Libraries
-
-# In[241]:
-
 
 # importing libraries
 import pandas as pd
@@ -15,18 +7,13 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-# In[242]:
-
-
 # reading file
-unemployment_df = pd.read_csv("D:/joti/projects/codealpha_tasks/unemployment_analysis/dataset/Unemployment in India.csv")
+unemployment_df = pd.read_csv("file_directory_here/Unemployment_data.csv")
 unemployment_df.info()
 unemployment_df.head()
 
 
 # ## Data Cleaning and Data Preparation
-
-# In[243]:
 
 
 # remove spaces in column names
@@ -34,8 +21,6 @@ unemployment_df.columns = unemployment_df.columns.str.strip()
 
 unemployment_df.head()
 
-
-# In[244]:
 
 
 # handling missing values
@@ -45,14 +30,10 @@ print("Missing values in unemployment_df: \n")
 print(unemployment_df.isnull().sum())
 
 
-# In[245]:
-
 
 # remove rows with missing data
 unemployment_df = unemployment_df.dropna()
 
-
-# In[246]:
 
 
 # check missing values
@@ -60,16 +41,12 @@ print("Missing values in unemployment_df: ")
 print(unemployment_df.isnull().sum())
 
 
-# In[247]:
-
 
 # change datatype of date to datetime
 
 unemployment_df["Date"] = pd.to_datetime(unemployment_df["Date"], errors = "coerce", dayfirst=True)
 print(unemployment_df["Date"].dtype)
 
-
-# In[248]:
 
 
 # Handling inconsistent values
@@ -80,8 +57,6 @@ unemployment_df["Frequency"] = unemployment_df["Frequency"].replace({"M" : "Mont
 print(unemployment_df.head())
 
 
-# In[249]:
-
 
 # checking for duplicate rows
 
@@ -91,15 +66,11 @@ print(f'Number of duplicate rows: {duplicate_rows}')
 
 # # Exploratory Data Analysis
 
-# In[250]:
-
 
 unemployment_df.describe()
 
 
 # ## Average Unemployment Rate by Region
-
-# In[251]:
 
 
 # Group by Region and calculate mean unemployment rate
@@ -122,8 +93,6 @@ plt.show()
 
 # ## Average Unemployment Rate by Month
 
-# In[252]:
-
 
 # Extracting month and year from "date" column
 unemployment_df["Month"] = unemployment_df["Date"].dt.month_name()
@@ -131,8 +100,6 @@ unemployment_df["Year"] = unemployment_df["Date"].dt.year.astype(int)
 
 unemployment_df["Year"] = unemployment_df["Year"].sort_values(ascending = True)
 
-
-# In[253]:
 
 
 # Group by Region and calculate mean unemployment rate
@@ -163,8 +130,6 @@ plt.show()
 
 # ## Average Unemployment Rate by Area (Rural vs Urban)
 
-# In[254]:
-
 
 # Group by Area and calculate mean unemployment rate
 by_area = unemployment_df.groupby("Area")["Estimated Unemployment Rate (%)"].mean().reset_index()
@@ -179,8 +144,6 @@ plt.show
 
 
 # ## Estimated Labour Participation vs Unemployment Rate
-
-# In[255]:
 
 
 # Sort data by date 
@@ -208,8 +171,6 @@ plt.legend()  # Show legend
 plt.grid(True, linewidth=0.5, alpha=0.5)
 plt.show()
 
-
-# In[256]:
 
 
 # Calculate averages
